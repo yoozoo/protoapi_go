@@ -12,8 +12,12 @@ type Message interface {
 }
 
 type Response struct {
-	Resp      *Message
+	Resp      Message
 	BizErr    BizError
 	CommonErr CommonError
 	Err       error
 }
+
+// ResponseHandler is the function to handle http response.
+// It may bind result or return an error
+type ResponseHandler func(res []byte, bizErr []byte, commonErr []byte) *Response

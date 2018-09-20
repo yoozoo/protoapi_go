@@ -7,20 +7,16 @@ import (
 	"net/http"
 )
 
-type protoapiClient struct {
+type ProtoapiClient struct {
 	baseURL string
 }
 
-// ResponseHandler is the function to handle http response.
-// It may bind result or return an error
-type ResponseHandler func(res []byte, bizErr []byte, commonErr []byte) *Response
-
-func (p *protoapiClient) SetBaseURL(url string) {
+func (p *ProtoapiClient) SetBaseURL(url string) {
 	p.baseURL = url
 }
 
 // CallAPI is used to call a API.
-func (p *protoapiClient) CallAPI(req *Message, method string, URL string, handler ResponseHandler) *Response {
+func (p *ProtoapiClient) CallAPI(req *Message, method string, URL string, handler ResponseHandler) *Response {
 	client := &http.Client{}
 
 	jsonStr, err := json.Marshal(req)
